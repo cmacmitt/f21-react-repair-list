@@ -1,11 +1,16 @@
 const Repair = (props) => {
-  const { id, description, completed, deleteRepair } = props;
+  const { id, description, completed, deleteRepair, toggleRepair } = props;
 
   return (
     // <li data-id={id} className={completed && "completed"}>
     <li data-id={id} className={completed ? "completed" : ""}>
       <div className="view">
-        <input className="toggle" type="checkbox" />
+        <input
+          onClick={() => toggleRepair(id)}
+          className="toggle"
+          type="checkbox"
+          checked={completed ? "completed" : ""}
+        />
         <label>{description}</label>
         <button onClick={() => deleteRepair(id)} className="destroy"></button>
       </div>
