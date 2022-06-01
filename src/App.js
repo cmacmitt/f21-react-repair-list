@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import RepairList from "./components/RepairList";
+import Form from "./components/Form";
 
 function App() {
+  const initialState = [
+    { id: 1, description: "car makes a funny sound", completed: true },
+    { id: 2, description: "window is broken", completed: false },
+    { id: 3, description: "bike has a flat tire", completed: true },
+  ];
+
+  const [repairs, setRepairs] = useState(initialState);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <section className="fixmeapp">
+      <Header>
+        <Form />
+      </Header>
+
+      <section className="main">
+        <RepairList repairs={repairs} />
+      </section>
+
+      <Footer />
+    </section>
   );
 }
 
