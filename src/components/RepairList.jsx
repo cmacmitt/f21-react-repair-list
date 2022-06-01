@@ -1,7 +1,7 @@
 import Repair from "./Repair";
 
 const RepairList = (props) => {
-  const { repairs } = props;
+  const { repairs, deleteRepair } = props;
 
   return (
     <ul className="repair-list">
@@ -11,6 +11,7 @@ const RepairList = (props) => {
           id={repair.id}
           description={repair.description}
           completed={repair.completed}
+          deleteRepair={deleteRepair}
         />
       ))}
     </ul>

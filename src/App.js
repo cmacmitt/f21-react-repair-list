@@ -14,6 +14,10 @@ function App() {
 
   const [repairs, setRepairs] = useState(initialState);
 
+  const handleDeleteRepair = (id) => {
+    setRepairs((prevState) => prevState.filter((repair) => repair.id !== +id));
+  };
+
   return (
     <section className="fixmeapp">
       <Header>
@@ -21,7 +25,7 @@ function App() {
       </Header>
 
       <section className="main">
-        <RepairList repairs={repairs} />
+        <RepairList repairs={repairs} deleteRepair={handleDeleteRepair} />
       </section>
 
       <Footer />
