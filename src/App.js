@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -6,13 +6,13 @@ import RepairList from "./components/RepairList";
 import Form from "./components/Form";
 
 function App() {
-  const initialState = [
-    { id: 1, description: "car makes a funny sound", completed: true },
-    { id: 2, description: "window is broken", completed: false },
-    { id: 3, description: "bike has a flat tire", completed: true },
-  ];
+  const initialState = JSON.parse(localStorage.getItem("repairs"));
 
-  const [repairs, setRepairs] = useState(initialState);
+  const [repairs, setRepairs] = useState(initialState || []);
+
+  useEffect(() => {
+    localStorage.setItem("repairs", JSON.stringify(repairs));
+  }, [repairs]);
 
   const handleAddRepair = (description) => {
     const id = +(Math.random() * 100).toFixed(4);
@@ -43,6 +43,12 @@ function App() {
     });
   };
 
+  const handleClearCompleted = () => {
+    setRepairs((prevState) =>
+      prevState.filter((repair) => repair.completed === false)
+    );
+  };
+
   return (
     <section className="fixmeapp">
       <Header>
@@ -57,7 +63,7 @@ function App() {
         />
       </section>
 
-      <Footer />
+      <Footer clearCompleted={handleClearCompleted} />
     </section>
   );
 }
